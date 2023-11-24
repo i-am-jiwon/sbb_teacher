@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -24,6 +26,14 @@ public class AttrService {
 
     @Transactional
     public void set(String name, String val) {
+        Optional<Attr> opAttr = attrRepository.findByName(name);
+
+        if (opAttr.isPresent()) {
+            opAttr.get().setVal(val);
+
+            return;
+        }
+
         Attr attr = Attr.builder()
                 .name(name)
                 .val(val)
@@ -61,7 +71,7 @@ public class AttrService {
         };
     }
 
-    private String get(String name, String defaultValue) {
+    public String get(String name, String defaultValue) {
         return attrRepository
                 .findByName(name)
                 .map(Attr::getVal)
