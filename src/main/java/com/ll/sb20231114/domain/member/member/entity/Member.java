@@ -1,16 +1,26 @@
 package com.ll.sb20231114.domain.member.member.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.List;
 
-@AllArgsConstructor
+import static jakarta.persistence.GenerationType.IDENTITY;
+
+@Entity
+@Builder
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode
 public class Member {
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
     private String username;

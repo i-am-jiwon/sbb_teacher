@@ -58,6 +58,8 @@ public class ArticleControllerTest {
     @Test
     @DisplayName("게시물 내용 페이지를 보여준다")
     void t2() throws Exception {
+        System.out.println("TEST : " + articleService.findById(1L).get());
+
         // WHEN
         ResultActions resultActions = mvc
                 .perform(get("/article/detail/1"))

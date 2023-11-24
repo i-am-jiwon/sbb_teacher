@@ -32,7 +32,7 @@ public class ArticleController {
     }
 
     @GetMapping("/detail/{id}")
-    String showDetail(Model model, @PathVariable long id) {
+    String showDetail(Model model, @PathVariable(name = "id") long id) {
         Article article = articleService.findById(id).get();
 
         model.addAttribute("article", article);
@@ -64,7 +64,7 @@ public class ArticleController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
-    String showModify(Model model, @PathVariable long id) {
+    String showModify(Model model, @PathVariable(name = "id") long id) {
         Article article = articleService.findById(id).get();
 
         if (!articleService.canModify(rq.getMember(), article)) throw new RuntimeException("수정권한이 없습니다.");
@@ -84,7 +84,7 @@ public class ArticleController {
 
     @PreAuthorize("isAuthenticated()")
     @PutMapping("/modify/{id}")
-    String modify(@PathVariable long id, @Valid ModifyForm modifyForm) {
+    String modify(@PathVariable(name = "id") long id, @Valid ModifyForm modifyForm) {
         Article article = articleService.findById(id).get();
 
         if (!articleService.canModify(rq.getMember(), article)) throw new RuntimeException("수정권한이 없습니다.");
@@ -96,7 +96,7 @@ public class ArticleController {
 
     @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/delete/{id}")
-    String delete(@PathVariable long id) {
+    String delete(@PathVariable(name = "id") long id) {
         Article article = articleService.findById(id).get();
 
         if (!articleService.canDelete(rq.getMember(), article)) throw new RuntimeException("삭제권한이 없습니다.");
