@@ -7,4 +7,6 @@ import jakarta.persistence.Id;
 public class Attr {
     @Id
     private Long id;
+    private String name;
+    private String val;
 }
