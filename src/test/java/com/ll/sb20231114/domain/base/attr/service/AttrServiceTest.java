@@ -21,4 +21,14 @@ public class AttrServiceTest {
 
         assertThat(age).isEqualTo(22);
     }
+
+    @DisplayName("변수의 값을 boolean 형태로 받을 수 있다.")
+    @Test
+    void t2() {
+        attrService.set("married", true);
+
+        boolean married = attrService.getAsBool("married", false);
+
+        assertThat(married).isEqualTo(true);
+    }
 }
