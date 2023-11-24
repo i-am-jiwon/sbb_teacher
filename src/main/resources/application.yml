@@ -1,6 +1,10 @@
 server:
   port: 8020
 spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
   thymeleaf:
     cache: false
   h2:
@@ -11,7 +15,6 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password:
-  mvc:
-    hiddenmethod:
-      filter:
-        enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: create
