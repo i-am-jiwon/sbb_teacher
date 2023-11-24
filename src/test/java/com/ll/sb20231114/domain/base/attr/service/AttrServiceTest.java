@@ -31,4 +31,15 @@ public class AttrServiceTest {
 
         assertThat(married).isEqualTo(true);
     }
+
+    @DisplayName("변수의 값은 덮어쓰기가 가능하다.")
+    @Test
+    void t3() {
+        attrService.set("siteOwner", "홍길동");
+        attrService.set("siteOwner", "임꺽정");
+
+        String siteOwner = attrService.get("siteOwner", null);
+
+        assertThat(siteOwner).isEqualTo("임꺽정");
+    }
 }
