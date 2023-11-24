@@ -13,6 +13,11 @@ public class AttrService {
     private final AttrRepository attrRepository;
 
     @Transactional
+    public void set(String name, boolean val) {
+        set(name, String.valueOf(val));
+    }
+
+    @Transactional
     public void set(String name, long val) {
         set(name, String.valueOf(val));
     }
@@ -39,6 +44,21 @@ public class AttrService {
         } catch (NumberFormatException e) {
             return defaultValue;
         }
+    }
+
+
+    public boolean getAsBool(String name, boolean defaultValue) {
+        String val = get(name, null);
+
+        if (val == null) {
+            return defaultValue;
+        }
+
+        return switch (val) {
+            case "true" -> true;
+            case "false" -> false;
+            default -> defaultValue;
+        };
     }
 
     private String get(String name, String defaultValue) {
